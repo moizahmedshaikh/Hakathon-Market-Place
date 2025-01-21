@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Marketplace Project
 
-## Getting Started
+## Project Overview
+This project is a marketplace application built using **Next.js** and **Tailwind CSS**. The app features a fully responsive UI with product listings, cart functionality, and user authentication. The backend is powered by **Sanity CMS**, and payment functionality is integrated using **Stripe**. The application has been optimized for both performance and security.
 
-First, run the development server:
+### Key Features:
+- Product listing and search functionality
+- Cart functionality with "Add to Cart" and "Checkout" features
+- User authentication and profile management
+- Integration with **Sanity CMS** for content management
+- Payment integration with **Stripe**
+- Fully responsive design using **Tailwind CSS**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Folder Structure
+This is the folder structure for the project:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+/project-root ├── /documents │ ├── lighthouse-report.pdf # Lighthouse performance testing report │ ├── test-case-report.csv # Test cases (functional, security, etc.) │ ├── deployment-instructions.md # Deployment steps documentation │ └── ... # Other documentation files  │ ├── /components # React components │ ├── /app # Pages (home, about, contact, etc.) │ ├── /styles # Tailwind CSS files or custom styles │ └── /utils # Utility functions │ ├── /public │ ├── /images # Images │ ├── /fonts # Fonts │ └── favicon.ico # Favicon file │ ├── /config │ ├── /env # Environment variables │ └── next.config.js # Next.js config │ ├── .gitignore # Git ignore file ├── package.json # Project dependencies ├── package-lock.json # Lock file ├── .env # Environment variables (API keys, etc.) └── README.md # This file
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment Steps
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Select Hosting Platform**:
+   - Recommended platforms: **Vercel** or **Netlify**.
 
-## Deploy on Vercel
+2. **Connect GitHub Repository**:
+   - Link your GitHub repository to the hosting platform.
+   - Set up the build and deployment settings.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Configure Environment Variables**:
+   - Add sensitive variables (like API keys) in the `.env` file.
+   - Securely upload them in the hosting platform dashboard.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Deploy Application**:
+   - Deploy the application to a **staging environment** and validate its functionality.
+
+5. **Test the Deployment**:
+   - Conduct **functional**, **performance**, and **security** testing.
+   - Generate reports for each testing type.
+
+---
+
+## Testing Reports
+
+### Performance Testing Report:
+The performance testing for the marketplace was done using **Lighthouse**. You can access the performance testing report [here](https://github.com/moizahmedshaikh/Hakathon-Market-Place/blob/main/.docs/Testing%20lighthouse-report.pdf).
+
+### Test Cases:
+All test cases, including functional and security tests, were documented. You can download the test case report [here](https://github.com/moizahmedshaikh/Hakathon-Market-Place/blob/main/.docs/Testing%20Report.csv).
+
+---
+
+## Issues and Future Enhancements
+- The project is ready for deployment, but minor issues related to performance (like image optimization) may need further attention.
+- Future enhancements include adding a review system for products, improving search functionality, and integrating multi-language support.
+
+---
+
+## Conclusion
+The project is now fully functional in a **staging environment**. All critical features have been tested, and the app is ready for deployment to a **production environment**. All reports, test cases, and deployment instructions have been documented and uploaded to the GitHub repository for easy reference.
+
+---
+
+## Contact
+For further information or inquiries, you can reach out to the project team at [moizaman905@gmail.com].
