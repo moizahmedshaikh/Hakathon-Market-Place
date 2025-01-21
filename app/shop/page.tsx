@@ -28,7 +28,7 @@ const Shop = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const query = `*[_type == "food"]{
+        const query = `*[_type=="food"]{
             name,
             description,
             price,
@@ -42,8 +42,8 @@ const Shop = () => {
         setDataAll(data);
         setFilteredData(data);
       } catch (error) {
-        setError("Items Not Found ❗",);
-        console.error(error)
+        setError("Items Not Found ❗");
+        console.log(error)
       } finally{
         setLoading(false)
       }

@@ -1,65 +1,36 @@
-# Market Place Hackathon
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Welcome to the **Market Place Hackathon** repository! This project demonstrates a feature-rich marketplace platform with dynamic functionalities and an intuitive user interface. It integrates modern web technologies for an engaging user experience.
+## Getting Started
 
----
+First, run the development server:
 
-## Features
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-- **Dynamic Product Management**: Add, update, and view product details seamlessly.
-- **Interactive UI**: Built with Next.js for a responsive and dynamic interface.
-- **Third-Party API Integrations**:
-  - Payment Gateway Integration for secure transactions.
-  - Real-time analytics and user activity tracking.
-- **Scalable Content Management**: Powered by Sanity CMS for efficient data handling.
-- **Optimized Performance**: Fast-loading pages with efficient resource usage.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
----
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## System Architecture
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-### Overview
+## Learn More
 
-The system architecture comprises three core components:
+To learn more about Next.js, take a look at the following resources:
 
-1. **Frontend**: Handles user interaction and dynamic content rendering using Next.js.
-2. **Sanity CMS**: Manages structured content for products, blogs, and more.
-3. **Third-Party APIs**: Enables payment processing, analytics, and other features.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Diagram
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-![System Architecture](./Documentation/images/System_Architecture.png)
+## Deploy on Vercel
 
----
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## Workflows
-
-### Example Workflow: "User Purchases a Product"
-
-1. **User Interaction**:
-   - User browses the marketplace and selects a product.
-   - Adds the product to the cart and proceeds to checkout.
-
-2. **Backend Communication**:
-   - Fetches product details and stock availability from Sanity CMS.
-   - Processes the payment using a third-party API.
-
-3. **Order Completion**:
-   - Saves the order details in Sanity CMS.
-   - Sends an email confirmation to the user.
-
-
-
-## Installation and Setup
-
-### Prerequisites
-
-- **Node.js** (v18 or later)
-- **Sanity CLI**
-- API keys for third-party integrations (e.g., Stripe, Google Analytics)
-
-### Steps to Run Locally
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/moizahmedshaikh/Hakathon-Market-Place
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
