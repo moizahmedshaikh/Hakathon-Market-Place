@@ -1,0 +1,8 @@
+Test Case ID,Test Case Description,Test Steps,Expected Result,Actual Result,Status,Seacurity Level,Remarks
+TC001,Validate Product Listing Page,Open Product Page > Validate Product,Product Discplay Successfullty,Product Discplay Successfullty,Passed,Low,Displayed Perfectfully
+TC002,Test API Error Handling,Desconnect Qroq Query > Refresh Page,Show Error Message On Screen,Show Error Message On Screen,Passed,Low,Displayed Successfully
+TC003,Check Cart Functionality,Add To Cart > Verify Cart Content,Cart Update With Added Product,Cart Updated as Expected,Passed,Medium,Work As Expected
+TC004,Validate Search Bar,Search Those Items Which Has not In Sanity,Showing Dropdown>no product found,Dropdown not Showing While Search,Passed,High,Expected Work
+TC005,Validate Dynamic Product Detailes,Product Page> Click to Any Product Cart,Open Dynamic Detaied Page,Open Dynamic Detaied Page,Passed,Low,Displayed Successfully
+TC006,Cross Browsing,Open Our Website On Different Browser,Working Correctly on Every Browser,Working Correctly on Every Browser,Passed,Low,Successful
+TC007,Ensure Responsive on Mobile & Tablet,Resize Browser Window,Layout Adjust Properly To Screen Size,Responsive Layout Working on Intended,Passed,Medium,Test Successfully
