@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer/Footer";
 import CartProvider from "@/components/Provider";
+import { ToastContainer } from 'react-toastify';
 
 const font = Inter({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
@@ -26,6 +27,7 @@ export default function RootLayout({
           <CartProvider>
             {children}
             <Footer />
+            <ToastContainer />
           </CartProvider>
         </div>
       </body>

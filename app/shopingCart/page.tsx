@@ -5,6 +5,7 @@ import Nav2 from "@/components/Nav2";
 import HeroLinks from "@/components/HeroLinks";
 import { useShoppingCart } from "use-shopping-cart";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 
 const ShoppingCart = () => {
@@ -15,6 +16,52 @@ const ShoppingCart = () => {
     incrementItem,
     decrementItem,
   } = useShoppingCart();
+
+
+  const handleRemoveItem = (id: string, name: string) => {
+    removeItem(id); // Remove item from cart
+    toast.success(`${name} has been removed from your cart!`, {
+      position: "bottom-right",
+      autoClose: 3000,
+      style: {
+        backgroundColor: "black",
+        color: "white",
+        fontSize: "16px",
+        borderRadius: "8px",
+      },
+    });
+  };
+
+  const handleIncreamentItem = (id:string, name: string) => {
+    incrementItem(id);
+    toast.success(`Quantity of ${name} increased!`, {
+      position: "bottom-right",
+      autoClose: 3000,
+      style: {
+        backgroundColor: "black",
+        color: "white",
+        fontSize: "16px",
+        borderRadius: "8px",
+      },
+    });
+  }
+
+  const handleDecreamentItem = (id:string, name: string) => {
+    decrementItem(id);
+    toast.success(`Quantity of ${name} decreased!`, {
+      position: "bottom-right",
+      autoClose: 3000,
+      style: {
+        backgroundColor: "black",
+        color: "white",
+        fontSize: "16px",
+        borderRadius: "8px",
+      },
+    });
+  }
+
+
+
   
 
   const total = Object.values(cartDetails ?? {}).reduce((acc, item) => {
@@ -64,7 +111,7 @@ const ShoppingCart = () => {
                         <td className="p-2 md:p-4">
                           <div className="flex items-center border border-gray-500 overflow-hidden w-[80px]">
                             <button
-                              onClick={() => decrementItem(entry.id)}
+                              onClick={() => handleDecreamentItem(entry.id, entry.name)}
                               className="w-1/3 h-full text-lg text-gray-500 hover:bg-gray-200 flex justify-center items-center"
                             >
                               -
@@ -73,7 +120,7 @@ const ShoppingCart = () => {
                               {entry.quantity}
                             </div>
                             <button
-                              onClick={() => incrementItem(entry.id)}
+                              onClick={() => handleIncreamentItem(entry.id, entry.name)}
                               className="w-1/3 h-full text-lg  text-gray-800 hover:bg-gray-200 flex justify-center items-center"
                             >
                               +
@@ -86,7 +133,7 @@ const ShoppingCart = () => {
                         <td className="p-2 md:p-4 text-2xl text-red-500 cursor-pointer">
                           <span
                             className="p-2"
-                            onClick={() => removeItem(entry.id)}
+                            onClick={() => handleRemoveItem(entry.id,entry.name)}
                           >
                             &times;
                           </span>

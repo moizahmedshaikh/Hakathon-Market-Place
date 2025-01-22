@@ -71,6 +71,7 @@ const ShopDetails = async ({
                 </Link>
 
                 <AddToCart stripe_id={data.stripe}  btnName="Add to Cart" name={data.name} price={data.price} images={data.image[0]}/>
+
               </div>
 
               <div className="text-gray-500 space-y-1">

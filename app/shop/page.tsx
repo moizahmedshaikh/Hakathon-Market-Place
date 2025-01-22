@@ -41,6 +41,7 @@ const Shop = () => {
         const data = await client.fetch(query);
         setDataAll(data);
         setFilteredData(data);
+        console.log(data)
       } catch (error) {
         setError("Items Not Found ❗");
         console.log(error)
