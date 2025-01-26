@@ -98,7 +98,7 @@ const Navbar = () => {
                       <IoSearch className="absolute top-2 right-4 text-2xl" />
                     </div> */}
 
-                    <SearchWithSanity />
+                    {/* <SearchWithSanity /> */}
                   </div>
                   <ul className="flex flex-col text-xl gap-7">
                     <li>
@@ -115,7 +115,7 @@ const Navbar = () => {
                     </li>
                     <li className="flex items-center">
                       <Link href={"/about"}>About</Link>
-                      <IoIosArrowDown />
+                      
                     </li>
                     <li>
                       <Link href={"/shop"}>Shop</Link>

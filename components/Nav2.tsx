@@ -125,7 +125,7 @@ const Nav2 = () => {
                     </li>
                     <li className="flex items-center">
                       <Link href={"/about"}>About</Link>
-                      <IoIosArrowDown />
+                      
                     </li>
                     <li>
                       <Link href={"/shop"}>Shop</Link>

@@ -1,5 +1,3 @@
-
-
 import HeroLinks from "@/components/HeroLinks";
 import Nav2 from "@/components/Nav2";
 import Link from "next/link";
@@ -9,7 +7,6 @@ import { client } from "@/sanity/lib/client";
 import AddToCart from "@/components/AddToCart";
 
 const getData = async (slug: string) => {
-
   const query = `*[_type == "food" && slug.current == "${slug}"][0]{
   _id,
     image,
@@ -17,12 +14,14 @@ const getData = async (slug: string) => {
     description,
     price,
     "slug": slug.current,
-    "category": category->name,
+    category,
     available,
     tags[0],
-    stripe
+    stripe,
+    _id
 } `;
   const data = await client.fetch(query);
+  console.log(data);
   return data;
 };
 
@@ -66,12 +65,26 @@ const ShopDetails = async ({
 
               <div className="flex items-center gap-4">
                 <Link href={"/checkout"}>
-
-                <AddToCart stripe_id={data.stripe} btnName="CheckOut" name={data.name} price={data.price} images={data.image[0]}/>
+                  <AddToCart
+                    key={data._id}
+                    price_id={data.stripe}
+                    btnName="CheckOut"
+                    name={data.name}
+                    price={data.price}
+                    images={data.image[0]}
+                    currency="USD"
+                  />
                 </Link>
 
-                <AddToCart stripe_id={data.stripe}  btnName="Add to Cart" name={data.name} price={data.price} images={data.image[0]}/>
-
+                <AddToCart
+                  key={data._id}
+                  price_id={data.stripe}
+                  btnName="Add to Cart"
+                  name={data.name}
+                  price={data.price}
+                  images={data.image[0]}
+                  currency="USD"
+                />
               </div>
 
               <div className="text-gray-500 space-y-1">
@@ -81,7 +94,9 @@ const ShopDetails = async ({
                   </span>
                 </p>
                 <p>
-                  <span className="font-bold text-gray-800">Tag: {data.tags}</span>
+                  <span className="font-bold text-gray-800">
+                    Tag: {data.tags}
+                  </span>
                 </p>
               </div>
 

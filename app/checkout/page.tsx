@@ -6,32 +6,64 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useShoppingCart } from "use-shopping-cart";
+import { useRouter } from "next/navigation";
 
 const Checkout = () => {
+  const router = useRouter();
+
   const { cartDetails, totalPrice, redirectToCheckout } = useShoppingCart();
-
-  const handleCheckOutStripe = async (event: { preventDefault: () => void; }) => {
-    event.preventDefault();
-    try{
-      const result = await redirectToCheckout();
-      if(result?.error){
-        console.log("result")
-      }
-    }catch(error){
-      console.log(error)
-    }
-  }
-
+   
+  
   console.log(cartDetails);
+  const [selectPaymentMethod, setSelectPaymentMethod] = useState("cash");
+  const [loading, setLoading] = useState(false);
 
-  const [billingSameAsShipping, setBillingSameAsShipping] = useState(false);
+  const [formValues, setFormValues] = useState({
+    firstName: "",
+    email: "",
+  });
+
+  const isFormValid = Object.values(formValues).every(
+    (value) => value.trim() !== ""
+  );
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormValues({ ...formValues, [id]: value });
+  };
+
+  const handlePlaceOrder = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!isFormValid) {
+      alert("Please fill all the required fields.");
+      return;
+    }
+
+    if (selectPaymentMethod === "card") {
+      setLoading(true);
+      try {
+        const result = await redirectToCheckout();
+        if (result?.error) {
+          console.error("Stripe error:", result.error);
+        }
+      } catch (error) {
+        console.error("Stripe checkout failed:", error);
+      }
+    } else if (selectPaymentMethod === "cash") {
+      setLoading(true);
+      router.push("/success"); // Navigate to success page for Cash on Delivery
+    }
+  };
 
   return (
     <div>
       <Nav2 />
       <HeroLinks heading="Checkout Page" url1="Home" url2="Checkout" />
 
-      <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 px-4 md:px-10">
+      <form
+        onSubmit={(e) => handlePlaceOrder(e)}
+        className="min-h-screen bg-gray-100 flex flex-col items-center py-10 px-4 md:px-10"
+      >
         <div className="max-w-6xl w-full bg-white rounded-lg flex flex-col md:flex-row">
           {/* Left Section */}
           <div className="w-full md:w-2/3 p-6 md:p-10">
@@ -39,11 +71,13 @@ const Checkout = () => {
               Shipping Address
             </h2>
 
-            <form className="grid grid-cols-1 text-[#333333] md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 text-[#333333] md:grid-cols-2 gap-6">
               <div className="flex flex-col">
                 <label htmlFor="firstName">Fisrt name</label>
                 <input
                   id="firstName"
+                  value={formValues.firstName}
+                  onChange={handleInputChange}
                   type="text"
                   className="p-3 border focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
@@ -61,6 +95,8 @@ const Checkout = () => {
               <div className="flex flex-col">
                 <label htmlFor="email">Email</label>
                 <input
+                  value={formValues.email}
+                  onChange={handleInputChange}
                   id="email"
                   type="email"
                   className="p-3 border focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -76,7 +112,7 @@ const Checkout = () => {
                 />
               </div>
 
-              <div className="flex flex-col">
+              {/* <div className="flex flex-col">
                 <label htmlFor="company">Company</label>
                 <input
                   id="company"
@@ -92,25 +128,25 @@ const Checkout = () => {
                   <option>USA</option>
                   <option>Pakistan</option>
                 </select>
-              </div>
+              </div> */}
 
-              <div className="flex flex-col">
+              {/*<div className="flex flex-col">
                 <p>City</p>
                 <select className="p-3 border focus:outline-none focus:ring-2 focus:ring-orange-500">
                   <option>Choose city</option>
                   <option>Karachi</option>
                   <option>Lahore</option>
                 </select>
-              </div>
+               </div>
 
-              <div className="flex flex-col">
+               <div className="flex flex-col">
                 <label htmlFor="zip">Zip code</label>
                 <input
                   id="zip"
                   type="text"
                   className="p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
-              </div>
+              </div>*/}
 
               <input
                 type="text"
@@ -123,31 +159,11 @@ const Checkout = () => {
                 placeholder="Address 2"
                 className="col-span-1 md:col-span-2 p-3 border focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
-            </form>
-
-            <h1 className="text-[#333333] font-bold mt-4">Billing Address</h1>
-
-            <div className=" flex items-center text-[#333333]">
-              <input
-                type="checkbox"
-                id="billingSameAsShipping"
-                checked={billingSameAsShipping}
-                onChange={() =>
-                  setBillingSameAsShipping(!billingSameAsShipping)
-                }
-                className="mr-2"
-              />
-              <label htmlFor="billingSameAsShipping" className="text-sm">
-                Same as shipping address
-              </label>
             </div>
 
-            <div className="mt-6 grid md:grid-cols-2 grid-cols-1 gap-4  text-[#333333]">
-              <button className="px-4 py-3 border hover:text-white hover:bg-textp text-sm">
+            <div className="mt-6 flex justify-center text-[#333333]">
+              <button className="px-4 py-3 text-md font-bold w-full border-2 hover:text-white hover:bg-textp">
                 <Link href={"/shopingCart"}>Back to cart</Link>
-              </button>
-              <button className="px-4 py-3 bg-textp text-white  text-sm hover:bg-orange-600">
-                Proceed to shipping
               </button>
             </div>
           </div>
@@ -157,7 +173,10 @@ const Checkout = () => {
             <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
             <div className="space-y-4">
               {Object.values(cartDetails ?? {}).map((entry) => (
-                <div key={entry.id} className="flex items-center justify-between">
+                <div
+                  key={entry.id}
+                  className="flex items-center justify-between"
+                >
                   <div className="flex  items-center space-x-4">
                     <Image
                       src={entry.image as string}
@@ -167,9 +186,7 @@ const Checkout = () => {
                       className="w-16 h-16 rounded-md object-cover"
                     />
                     <div>
-                      <h3 className="text-sm font-medium">
-                        {entry.name}
-                      </h3>
+                      <h3 className="text-sm font-medium">{entry.name}</h3>
                       <p className="text-xs text-gray-500">150 gm net</p>
                       <p className="text-xs text-gray-500">{entry.quantity}</p>
                     </div>
@@ -188,13 +205,10 @@ const Checkout = () => {
                 <span>Shipping</span>
                 <span>Free</span>
               </div>
-              <div className="flex justify-between text-sm">
-                <span>Discount</span>
-                <span>25%</span>
-              </div>
+              
               <div className="flex justify-between text-sm">
                 <span>Tax</span>
-                <span>$54.76</span>
+                <span>$0</span>
               </div>
             </div>
 
@@ -204,12 +218,50 @@ const Checkout = () => {
             </div>
             {/* {shipping ?   : pleaser  } */}
 
-            <button onClick={handleCheckOutStripe} className="mt-6 w-full bg-textp text-white py-3 rounded-md hover:bg-orange-600">
-              Place an order
+            <div>
+              <div className="flex items-center gap-2">
+                <input
+                  defaultChecked
+                  value="cash"
+                  id="cash"
+                  type="radio"
+                  name="payment"
+                  onChange={(e) => setSelectPaymentMethod(e.target.value)}
+                />
+                <label className="text-sm" htmlFor="cash">
+                  Cash on Delivery
+                </label>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <input
+                  value="card"
+                  id="card"
+                  type="radio"
+                  name="payment"
+                  onChange={(e) => setSelectPaymentMethod(e.target.value)}
+                />
+                <label className="text-sm" htmlFor="card">
+                  Card Payment
+                </label>
+              </div>
+            </div>
+
+            <button
+            
+              type="submit"
+              disabled={!isFormValid || loading}
+              className={`mt-6 w-full font-bold py-3 rounded-sm ${
+                !isFormValid || loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-textp text-white hover:bg-orange-600"
+              }`}
+            >
+              {loading ? "Loading..." : "Place an order"}
             </button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

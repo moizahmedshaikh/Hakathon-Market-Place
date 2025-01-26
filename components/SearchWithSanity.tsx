@@ -67,7 +67,7 @@ export default function SearchWithSanity() {
 
           <IoSearch
             onClick={handleSearch}
-            className="absolute top-2 right-4 text-2xl"
+            className="absolute top-2 right-4 text-2xl cursor-pointer"
           />
         </div>
         {showResults && (

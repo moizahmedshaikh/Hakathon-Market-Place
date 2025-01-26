@@ -23,7 +23,7 @@ const Shop = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,12 +41,12 @@ const Shop = () => {
         const data = await client.fetch(query);
         setDataAll(data);
         setFilteredData(data);
-        console.log(data)
+        console.log(data);
       } catch (error) {
         setError("Items Not Found ❗");
-        console.log(error)
-      } finally{
-        setLoading(false)
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -93,14 +93,14 @@ const Shop = () => {
       <HeroLinks heading="Our Shop" url1="Home" url2="Shop" />
       {loading ? (
         <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black border-solid"></div>
-      </div>
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black border-solid"></div>
+        </div>
       ) : error ? (
         <div className="text-5xl text-red-500 h-64 flex justify-center items-center">
           <h2>Opps Items Not Found❗</h2>
         </div>
       ) : (
-        <div className="py-20 px-10 max-w-[1320px] flex lg:flex-row flex-col gap-4 mx-auto sm:mt-10 mt-5">
+        <div className="sm:py-16 py-8 md:px-10 px-6 max-w-[1320px] flex lg:flex-row flex-col-reverse gap-4 mx-auto sm:mt-10 mt-5">
           <div className="max-w-[872px] mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {filteredData.length === 0 ? (
@@ -141,42 +141,50 @@ const Shop = () => {
             </div>
           </div>
 
-          <div className="max-w-[312px] border-gray-200 border-[0.3px] p-8">
+          <div className="lg:max-w-[312px] w-full border-gray-200 lg:border-[0.3px] lg:p-8 p-2">
             {/* Search Box */}
-            <div className="flex border-gray-300 border-[0.3px]">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search Products"
-                className="w-full px-3 bg-[#fff5e7] text-[#333333] py-3 placeholder:text-gray-400 placeholder:text-base"
-              />
-              <div className="bg-textp py-3 px-5">
-                <IoSearch className="" size={25} />
+
+            <div className="flex lg:block flex-col items-center">
+              <div className="flex border-gray-300 border-[0.3px]">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search Products"
+                  className="w-full px-3 bg-[#fff5e7] text-[#333333] py-3 placeholder:text-gray-400 placeholder:text-base"
+                />
+                <div className="bg-textp py-3 px-5">
+                  <IoSearch className="" size={25} />
+                </div>
+              </div>
+
+              {/* Category Filter */}
+              <div className="mt-5">
+                <h2 className="text-[#333333] text-xl lg:text-start text-center font-semibold">
+                  Category
+                </h2>
+                <div className="text-[#333333] lg:mt-5 mt-2 gap-x-2 lg:block grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 ">
+                  {["Sandwich", "Burger", "Chicken ", "Drink", "Pizza"].map(
+                    (category, index) => (
+                      <div
+                        className="flex items-center gap-2 lg:py-2 py-1"
+                        key={index}
+                      >
+                        <input
+                          id={category}
+                          type="checkbox"
+                          checked={selectedCategories.includes(category)}
+                          onChange={() => handleCategoryChange(category)}
+                        />
+                        <label htmlFor={category}>{category}</label>
+                      </div>
+                    )
+                  )}
+                </div>
               </div>
             </div>
 
-            {/* Category Filter */}
-            <div className="mt-5">
-              <h2 className="text-[#333333] text-xl font-semibold">Category</h2>
-              <div className="text-[#333333] mt-5">
-                {["Sandwich", "Burger", "Chicken Chup", "Drink", "Pizza"].map(
-                  (category, index) => (
-                    <div className="flex items-center gap-2 py-2" key={index}>
-                      <input
-                        id={category}
-                        type="checkbox"
-                        checked={selectedCategories.includes(category)}
-                        onChange={() => handleCategoryChange(category)}
-                      />
-                      <label htmlFor={category}>{category}</label>
-                    </div>
-                  )
-                )}
-              </div>
-            </div>
-
-            <div className="mt-5">
+            <div className="mt-5 lg:block hidden">
               <h1 className="text-[#333333] text-xl Headings mb-4">
                 Latest Products
               </h1>
@@ -266,7 +274,7 @@ const Shop = () => {
               </div>
             </div>
 
-            <div className="mt-5">
+            <div className="mt-5 lg:block hidden">
               <h1 className="text-[#333333] text-xl Headings mb-4">
                 Product Tags
               </h1>

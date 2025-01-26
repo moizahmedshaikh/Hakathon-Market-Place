@@ -47,7 +47,7 @@ This is the folder structure for the project:
 ## Testing Reports
 
 ### Performance Testing Report:
-The performance testing for the marketplace was done using **Lighthouse**. You can access the performance testing report [here](https://github.com/moizahmedshaikh/Hakathon-Market-Place/blob/main/.docs/lighthouse-report.pdf).
+The performance testing for the marketplace was done using **Lighthouse**. You can access the performance testing report [here](https://github.com/moizahmedshaikh/Hakathon-Market-Place/blob/main/.docs/Testing%20lighthouse-report.pdf).
 
 ### Test Cases:
 All test cases, including functional and security tests, were documented. You can download the test case report [here](https://github.com/moizahmedshaikh/Hakathon-Market-Place/blob/main/.docs/Testing%20Report.csv).
