@@ -39,7 +39,7 @@ const SignUp = () => {
         password: password,
       });
 
-      console.log("Clerk Signup Response:", result); // ✅ DEBUGGING
+      console.log("Clerk Signup Response:", result); 
 
       if (result.status === "complete") {
         // ✅ Redirect to signin page instead of setting active session
