@@ -1,14 +1,11 @@
-
-
 "use client";
-import { SignInButton, useSignIn, useUser } from "@clerk/nextjs"; // Add useUser
+import { useSignIn, useUser } from "@clerk/nextjs"; // Add useUser
 import HeroLinks from "@/components/HeroLinks";
 import Nav2 from "@/components/Nav2";
-import React, {useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 // djnaes
-
 
 const Signin = () => {
   const router = useRouter();
@@ -18,7 +15,6 @@ const Signin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
 
   const handleSignIn = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -59,11 +55,16 @@ const Signin = () => {
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.error("Sign-in error:", err.message);
-        setError(err.message || "An error occurred during sign-in. Please try again.");
+        setError(
+          err.message || "An error occurred during sign-in. Please try again."
+        );
       } else if (typeof err === "object" && err !== null && "errors" in err) {
         // Agar error ek object hai aur usme "errors" property exist karti hai
         const errorObject = err as { errors?: { message?: string }[] };
-        setError(errorObject.errors?.[0]?.message || "An error occurred during sign-in. Please try again.");
+        setError(
+          errorObject.errors?.[0]?.message ||
+            "An error occurred during sign-in. Please try again."
+        );
       } else {
         console.error("Sign-in error:", err);
         setError("An unknown error occurred. Please try again.");
@@ -147,7 +148,31 @@ const Signin = () => {
             <div className="flex-grow h-px bg-gray-300"></div>
           </div>
           {/* Social Sign In */}
-          <SignInButton mode="modal">
+
+          {/* ✅ Google Sign-up Button */}
+
+          <button
+            className="w-full flex items-center justify-center border border-gray-300 rounded-md py-2 text-gray-600 hover:bg-gray-100"
+            onClick={() =>
+              signIn?.authenticateWithRedirect({
+                strategy: "oauth_google",
+                redirectUrl: "/auth-callback",
+                redirectUrlComplete: "/",
+              })
+            }
+            disabled={!isLoaded}
+          >
+            <Image
+              height={1000}
+              width={1000}
+              src="/google.png"
+              alt="Google"
+              className="w-5 h-5 mr-2"
+            />
+            Sign up with Google
+          </button>
+
+          {/* <SignInButton mode="modal">
             <button className="w-full flex items-center justify-center border border-gray-300 rounded-md py-2 text-gray-600 hover:bg-gray-100">
               <Image
                 height={20}
@@ -158,7 +183,7 @@ const Signin = () => {
               />
               Sign in with Google
             </button>
-          </SignInButton>
+          </SignInButton> */}
         </div>
       </div>
     </div>
